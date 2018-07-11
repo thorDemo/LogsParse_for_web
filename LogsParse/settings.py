@@ -55,7 +55,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'LogParse.urls'
+ROOT_URLCONF = 'LogsParse.urls'
 
 TEMPLATES = [
     {
@@ -74,7 +74,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'LogParse.wsgi.application'
+WSGI_APPLICATION = 'LogsParse.wsgi.application'
 
 
 # Database

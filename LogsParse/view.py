@@ -15,13 +15,9 @@ def index(request):
 def data(request):
     client = SSHClient()
     SSH = client.ssh_connect()
-    temp = client.spider_number(SSH, url='ctcban.com')
-    date = datetime.datetime.now().strftime('%Y%m%d')
-    category = []
-    for day in range(0, 10):
-        this_day = (datetime.datetime.strptime(date, '%Y%m%d') - datetime.timedelta(days=(10 - day))).strftime('%Y%m%d')
-        category.append(this_day)
-    data = {"baidu": temp[0:10], "shenma": temp[10:20], "s360": temp[20:30], "shougou": temp[30:40], "category":category}
+    spider_num, logs_num = client.spider_number(SSH, url='aidshe.com')
+    num = len(logs_num)/4
+    data = {"baidu": spider_num[0:num], "shenma": spider_num[num:num*2], "s360": spider_num[num*2:num*3], "shougou": spider_num[num*3:num*4], "category": logs_num}
     print('请求成功')
     SSH.close()
     return HttpResponse(json.dumps(data, ensure_ascii=False))
