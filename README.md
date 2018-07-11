@@ -6,3 +6,5 @@
 * main.py 主程序
 
 * index.html 结果显示页面 # LogParse
+
+* web 端访问 127.0.0.1
