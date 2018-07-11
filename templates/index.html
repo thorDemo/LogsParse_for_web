@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>hello</title>
+    {% load static %}
+    <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
+</head>
+<script>
+    $.getJSON('/data/').done(function (data) {
+    myChart.setOption({
+        series: [{
+            name:'百度蜘蛛',
+            type:'line',
+            stack: '总量',
+            areaStyle: {normal: {}},
+            data: data['baidu']
+        },
+        {
+            name:'神马蜘蛛',
+            type:'line',
+            stack: '总量',
+            areaStyle: {normal: {}},
+            data: data['shenma']
+        },
+        {
+            name:'360蜘蛛',
+            type:'line',
+            stack: '总量',
+            areaStyle: {normal: {}},
+            data: data['s360']
+        },
+        {
+            name:'搜狗蜘蛛',
+            type:'line',
+            stack: '总量',
+            areaStyle: {normal: {}},
+            data: data['shougou']
+        }],
+        xAxis : [
+        {
+            type : 'category',
+            boundaryGap : false,
+            data : data['category']
+        }]
+    });
+});
+</script>
+<body>
+    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
+    <div id="main" style="width: 800px;height:600px; margin: auto" ></div>
+</body>
+    <script src="{% static 'js/hello.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'css/hello.css' %}"/>
+</html>
