@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
-from LogsParse.lib.data import SSHClient
+from LogsParse.libs.data import SSHClient
 import datetime
 
 
