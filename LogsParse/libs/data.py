@@ -8,7 +8,7 @@ import time
 
 class SSHClient:
     # 配置链接
-    def __init__(self, host='23.110.211.170', port=22, user='root', pwd='Hxt414722027'):
+    def __init__(self, host='23.110.211.170', port=22, user='root', pwd='free@0516'):
         self.SPIDER_HOST = host
         self.SPIDER_PORT = port
         self.SPIDER_USER = user
