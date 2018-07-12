@@ -8,63 +8,76 @@
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 </head>
 <script>
-    function getdata(){
-            post_data = {
-                'url':$("#post_url").val(),
-                'ip':$("#post_ip").val(),
-                'pwd':$("#post_pwd").val(),
-            };
-            $.getJSON('/data/',post_data).done(function (data) {
-            myChart.setOption({
-                series: [{
-                    name:'百度蜘蛛',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data: data['baidu']
-                },
-                {
-                    name:'神马蜘蛛',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data: data['shenma']
-                },
-                {
-                    name:'360蜘蛛',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data: data['s360']
-                },
-                {
-                    name:'搜狗蜘蛛',
-                    type:'line',
-                    stack: '总量',
-                    areaStyle: {normal: {}},
-                    data: data['shougou']
-                }],
-                xAxis : [
-                {
-                    type : 'category',
-                    boundaryGap : false,
-                    data : data['category']
-                }]
-            });
-        });
-    }
+    app.title = '世界人口总量 - 条形图';
 
+option = {
+    title: {
+        text: '世界人口总量',
+        subtext: '数据来自网络'
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        }
+    },
+    legend: {
+        data: ['2011年', '2012年', '2013年']
+    },
+    grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true
+    },
+    xAxis: {
+        type: 'value',
+        boundaryGap: [0, 0.01]
+    },
+    yAxis: {
+        type: 'category',
+        data: ['巴西','印尼','美国','印度','中国','世界人口']
+    },
+    series: [
+        {
+            name: '2011年',
+            type: 'bar',
+            data: [18203, 23489, 29034, 104970, 131744, 630230]
+        },
+        {
+            name: '2012年',
+            type: 'bar',
+            data: [19325, 23438, 31000, 121594, 134141, 681807]
+        },
+        {
+            name: '2013年',
+            type: 'bar',
+            data: [19325, 23438, 31000, 101594, 100141, 601807]
+        }
+    ]
+};
 </script>
-<body>
-    <!-- 为 ECharts 准备一个具备大小（宽高）的 DOM -->
-    <div id="main" style="width: 800px;height:600px; margin: auto" ></div>
-    <div style="text-align: center">
-         <input value="服务器IP" style="margin: auto" id="post_ip" type="text"/>
-         <input value="服务器密码" style="margin: auto" id="post_pwd" type="text"/>
-         <input value="查询网址" style="margin: auto" id="post_url" type="text"/>
-         <input onclick="getdata()" value="点击查询" type="button" style="margin: auto"/>
-    </div>
 
+<body>
+    <div style="text-align: center">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <input placeholder="服务器IP" style="margin: auto;" id="post_ip" type="text"/>
+            <input placeholder="服务器密码" style="margin: auto" id="post_pwd" type="password"/>
+            <input placeholder="查询网址" style="margin: auto;" id="post_url" type="text"/>
+            <input onclick="getdata()" value="点击查询" type="button" style="margin: auto"/>
+        </div>
+        <div id="chart1" style="width: 800px;height:600px; margin: auto" ></div>
+    </div>
+    <div style="text-align: center">
+        <div style="text-align: center; margin-bottom: 20px">
+            <input placeholder="服务器IP" style="margin: auto;" id="post_ip" type="text"/>
+            <input placeholder="服务器密码" style="margin: auto" id="post_pwd" type="password"/>
+            <input placeholder="日期：20180808" style="margin: auto;" id="post_url" type="text"/>
+            <input onclick="getdata()" value="点击查询" type="button" style="margin: auto"/>
+        </div>
+        <div id="chart2" style="width: 800px;height:400px;margin: auto"></div>
+
+    </div>
 </body>
     <script src="{% static 'js/LogsParse_for_web.js' %}"></script>
     <link rel="stylesheet" href="{% static 'css/hello.css' %}"/>
