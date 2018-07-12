@@ -11,11 +11,12 @@ def index(request):
 
 
 def data(request):
-    url = request.GET.get('url').encode('utf-8').decode('latin1')
-    ip = request.GET.get('ip').encode('utf-8').decode('latin1')
-    pwd = request.GET.get('pwd').encode('utf-8').decode('latin1')
-    client = SSHClient(host=ip, pwd=pwd)
-    print('host = %s,url = %s,pwd = %s', (ip, url, pwd))
+    url = request.GET.get('url')
+    ip = request.GET.get('ip')
+    pwd = request.GET.get('pwd')
+    port = request.GET.get('port')
+    client = SSHClient(host=ip, pwd=pwd, port=port)
+    print('host = %s,url = %s,pwd = %s,port = %s' % (ip, url, pwd, port))
     SSH = client.ssh_connect()
     print('url=%s' % url)
     spider_num, logs_num = client.spider_number(SSH, url=url)

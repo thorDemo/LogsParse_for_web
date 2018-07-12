@@ -126,6 +126,7 @@ function getdata(){
                 'url':$("#post_url").val(),
                 'ip':$("#post_ip").val(),
                 'pwd':$("#post_pwd").val(),
+                'port':$("#post_port").val(),
             };
             $.getJSON('/data/',post_data).done(function (data) {
             myChart1.setOption({
