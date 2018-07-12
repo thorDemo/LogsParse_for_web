@@ -8,7 +8,7 @@ import time
 
 class SSHClient:
     # 配置链接
-    def __init__(self, host='23.110.211.170', port=22, user='root', pwd='free@0516'):
+    def __init__(self, host='23.110.211.170', port=22, user='root', pwd=''):
         self.SPIDER_HOST = host
         self.SPIDER_PORT = port
         self.SPIDER_USER = user
@@ -23,17 +23,17 @@ class SSHClient:
         try:
             _ssh_fd.set_missing_host_key_policy(paramiko.AutoAddPolicy())
             _ssh_fd.connect(self.SPIDER_HOST, username=self.SPIDER_USER, password=self.SPIDER_PWD, allow_agent=False, look_for_keys=False)
-            print('链接成功')
+            print('connect success!')
             return _ssh_fd
         except SSHException as e:
-            print('重试')
+            print('reload connect')
             _ssh_fd.close()
             self.ssh_connect()
             self.num += 1
 
     # 执行CMD 命令
     def ssh_exec_cmd(self, _ssh_fd, cmd):
-        print("执行命令 %s \n%s" % (self.SPIDER_HOST, cmd))
+        print("exec command %s \n%s" % (self.SPIDER_HOST, cmd))
         return _ssh_fd.exec_command(cmd, get_pty=True)
 
     # 查询蜘蛛数量
