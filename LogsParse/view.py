@@ -11,9 +11,9 @@ def index(request):
 
 
 def data(request):
-    url = request.GET.get('url')
-    ip = request.GET.get('ip')
-    pwd = request.GET.get('pwd')
+    url = request.GET.get('url').encode('utf-8').decode('latin1')
+    ip = request.GET.get('ip').encode('utf-8').decode('latin1')
+    pwd = request.GET.get('pwd').encode('utf-8').decode('latin1')
     client = SSHClient(host=ip, pwd=pwd)
     print(pwd)
     SSH = client.ssh_connect()

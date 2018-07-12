@@ -128,7 +128,7 @@ function getdata(){
                 'pwd':$("#post_pwd").val(),
             };
             $.getJSON('/data/',post_data).done(function (data) {
-            myChart.setOption({
+            myChart1.setOption({
                 series: [{
                     name:'百度蜘蛛',
                     type:'line',
