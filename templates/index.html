@@ -5,6 +5,7 @@
     <title>hello</title>
     {% load static %}
     <script src="{% static 'js/echarts.min.js' %}"></script>
+    <script src="{% static 'js/echarts-gl.js' %}"></script>
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
 </head>
 <script>
@@ -74,7 +75,7 @@ option = {
             <input placeholder="日期：20180808" style="margin: auto;" id="post_url" type="text"/>
             <input onclick="getdata()" value="点击查询" type="button" style="margin: auto"/>
         </div>
-        <div id="chart2" style="width: 800px;height:400px;margin: auto"></div>
+        <div id="chart2" style="width: 800px;height:800px;margin-bottom: 100px;text-align: center;margin: auto"></div>
 
     </div>
 </body>
