@@ -1,84 +1,191 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>老霸王蜘蛛管理工具</title>
-    {% load static %}
-    <script src="{% static 'js/echarts.min.js' %}"></script>
-    <script src="{% static 'js/echarts-gl.js' %}"></script>
-    <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
-</head>
-<script>
-option = {
-    title: {
-        text: '世界人口总量',
-        subtext: '数据来自网络'
-    },
-    tooltip: {
-        trigger: 'axis',
-        axisPointer: {
-            type: 'shadow'
-        }
-    },
-    legend: {
-        data: ['2011年', '2012年', '2013年']
-    },
-    grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true
-    },
-    xAxis: {
-        type: 'value',
-        boundaryGap: [0, 0.01]
-    },
-    yAxis: {
-        type: 'category',
-        data: ['巴西','印尼','美国','印度','中国','世界人口']
-    },
-    series: [
-        {
-            name: '2011年',
-            type: 'bar',
-            data: [18203, 23489, 29034, 104970, 131744, 630230]
-        },
-        {
-            name: '2012年',
-            type: 'bar',
-            data: [19325, 23438, 31000, 121594, 134141, 681807]
-        },
-        {
-            name: '2013年',
-            type: 'bar',
-            data: [19325, 23438, 31000, 101594, 100141, 601807]
-        }
-    ]
-};
-</script>
+<html><head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+        {% load static %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css'%}">
+		<link rel="stylesheet" type="text/css" href="{% static 'css/main.css'%}">
+		<title>蜘蛛日志分析工具</title>
+	</head>
+	<body>
+		<nav class="navbar navbar-default navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<button type="button" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false" class="navbar-toggle collapsed">
+						<span class="sr-only">
+							Toggle navigation
+						</span>
+						<span class="icon-bar">
+						</span>
+						<span class="icon-bar">
+						</span>
+						<span class="icon-bar">
+						</span>
+					</button>
+					<a href="http://echarts.baidu.com/index.html" class="navbar-brand">
+						<img src="static/img/logo.png" alt="echarts logo" class="navbar-logo">
+					</a>
+				</div>
+				<div id="navbar-collapse" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-left">
+						<li id="nav-index">
+							<a href="#">
+								首页
+							</a>
+						</li>
+						<li id="nav-doc" class="dropdown">
+							<a href="#">
+								分组
+								<b class="caret">
+								</b>
+							</a>
 
-<body>
-    <div style="text-align: center">
-        <div style="text-align: center; margin-bottom: 20px;">
-            <input placeholder="服务器IP" style="margin: auto;" id="post_ip" type="text"/>
-            <input placeholder="服务器密码" style="margin: auto" id="post_pwd" type="password"/>
-            <input placeholder="顶级域名" style="margin: auto;" id="post_url" type="text"/>
-            <input placeholder="端口号" style="margin: auto;" id="post_port" type="text"/>
-            <input onclick="getdata()" value="点击查询" type="button" style="margin: auto"/>
-        </div>
-        <div id="chart1" style="width: 800px;height:600px; margin: auto" ></div>
-    </div>
-    <div style="text-align: center">
-        <div style="text-align: center; margin-bottom: 20px">
-            <input placeholder="服务器IP" style="margin: auto;" id="post_ip" type="text"/>
-            <input placeholder="服务器密码" style="margin: auto" id="post_pwd" type="password"/>
-            <input placeholder="日期：20180808" style="margin: auto;" id="post_url" type="text"/>
-            <input onclick="getdata()" value="点击查询" type="button" style="margin: auto"/>
-        </div>
-        <div id="chart2" style="width: 800px;height:800px;margin-bottom: 100px;text-align: center;margin: auto"></div>
+						</li>
+						<li id="nav-download" class="dropdown">
+							<a href="#">
+								总览
+								<b class="caret">
+								</b>
+							</a>
 
-    </div>
+						</li>
+						<li id="nav-examples" class="dropdown">
+							<a href="#">
+								周览
+								<b class="caret">
+								</b>
+							</a>
+
+						</li>
+						<li id="nav-community">
+							<a href="#">
+								实时
+								<b class="caret">
+								</b>
+							</a>
+
+						</li>
+						<li id="nav-tool">
+							<a href="#">
+								工具
+								<b class="caret">
+								</b>
+							</a>
+
+						</li>
+						<li id="nav-about">
+							<a href="">
+								刷新
+								<b class="caret">
+								</b>
+							</a>
+
+						</li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li id="nav-github">
+							<a href="https://github.com/thorDemo/LogsParse_for_web.git" target="_blank">
+								<img src="static/img/github.png" width="18">
+							</a>
+						</li>
+						<li id="nav-2" class="0">
+							<a href="#">
+								2.0
+							</a>
+						</li>
+						<li id="nav-homeen">
+							<a href="#">
+								EN
+							</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+		<div id="main-container">
+			<div id="code-container" style="width: 20%;">
+				<div id="control-panel">
+					<div id="code-info" >
+						<span class="code-info-time">
+							19:28:43
+						</span>
+						<span class="code-info-type-info">
+							9组蜘蛛池网址
+						</span>
+					</div>
+					<div >
+						<a href="javascript:;" onclick="" class="btn btn-default btn-sm" style="position: absolute;right: 25%">
+							查询
+						</a>
+					</div>
+				</div>
+				<div id="code-panel" class=" ace_editor ace-tm" style="background-color: #FFFFFF">
+					<div class="ace_gutter">
+						<div class="ace_layer ace_gutter-layer ace_folding-enabled" style="margin-top: 0px; width: 40px; float: left;">
+							<div class="" style="">
+							</div>
+						</div>
+						<div class="ace_gutter-active-line" style="top: 224px; height: 14px; float: left;">
+						</div>
+					</div>
+					<div class="ace_scrollbar ace_scrollbar-v" style="width: 22px; bottom: 17px;">
+						<div class="ace_scrollbar-inner" style="width: 22px;">
+
+						</div>
+					</div>
+					<div class="ace_scrollbar ace_scrollbar-h" style="height: 22px; left: 47px; right: 17px;">
+						<div class="ace_scrollbar-inner" style="height: 22px; width: 546px;">
+                            <span>001</span>
+                            <span>http://www.aibding.com</span>
+						</div>
+                        <div class="ace_scrollbar-inner" style="height: 22px; width: 546px;">
+                            <span>002</span>
+                            <span>http://www.aibding.com</span>
+						</div>
+                        <div class="ace_scrollbar-inner" style="height: 22px; width: 546px;">
+                            <span>003</span>
+                            <span>http://www.aibding.com</span>
+						</div>
+
+					</div>
+					<div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: hidden;">
+						<div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font: inherit; overflow: visible;">
+						</div>
+						<div style="height: auto; width: auto; top: 0px; left: 0px; visibility: hidden; position: absolute; white-space: pre; font-style: inherit; font-variant: inherit; font-stretch: inherit; font-size: inherit; line-height: inherit; font-family: inherit; overflow: visible;">
+                            xxx
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="h-handler" class="handler" style="left: 15%;"></div>
+			<div class="right-container" style="width: 85%; left: 15%;">
+				<div id="chart-panel" class="right-panel" >
+
+				</div>
+				<div id="tool-panel">
+					<div id="theme">
+						<a title="" class="default selected" data-original-title="default">
+							<span>
+							</span>
+						</a>
+						<a title="" class="light" data-original-title="light">
+							<span>
+							</span>
+						</a>
+						<a title="" class="dark" data-original-title="dark">
+							<span>
+							</span>
+						</a>
+					</div>
+					<button id="download" class="btn btn-sm">
+						Download
+					</button>
+				</div>
+			</div>
+		</div>
+        <script type="text/javascript" src="{% static 'js/jquery-3.3.1.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/echarts.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/echarts-gl.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/LogsParse_for_web.js'%}"></script>
 </body>
-    <script src="{% static 'js/LogsParse_for_web.js' %}"></script>
-    <link rel="stylesheet" href="{% static 'css/hello.css' %}"/>
 </html>
