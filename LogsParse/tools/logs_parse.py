@@ -20,7 +20,7 @@ def read_logs(spider_name):
         path = '/www/wwwroot/xbw/temp/robotlog/'
         file_name = os.listdir(path + '/' + spider_name)
         for name in file_name:
-            file_baidu = open('%s/%s' % (path, name), 'r+')
+            file_baidu = open('%s%s/%s' % (path,spider_name, name), 'r+')
             for line in file_baidu:
                 data = line.split('\t')
                 temp = [data[0].split(' ')[0], data[0].split(' ')[1], data[1], data[2], data[3].split('/', 3)[2],
