@@ -14,19 +14,16 @@ def insert(data, db):
     db.insert(sql, param)
 
 
-def read_logs(spider_name):
+def read_logs(file_name):
     try:
         db = DBHelper()
-        path = '/www/wwwroot/xbw/temp/robotlog/'
-        file_name = os.listdir(path + '/' + spider_name)
-        for name in file_name:
-            file_baidu = open('%s%s/%s' % (path,spider_name, name), 'r+')
-            for line in file_baidu:
-                data = line.split('\t')
-                temp = [data[0].split(' ')[0], data[0].split(' ')[1], data[1], data[2], data[3].split('/', 3)[2],
-                        data[4].strip('\n')]
-                print('%s # %s ### %s'% (spider_name, name, temp))
-                insert(temp, db)
+        file_baidu = open('/www/wwwroot/xbw/temp/robotlog/Baiduspider/%s' % file_name, 'r+')
+        for line in file_baidu:
+            data = line.split('\t')
+            temp = [data[0].split(' ')[0], data[0].split(' ')[1], data[1], data[2], data[3].split('/', 3)[2],
+                    data[4].strip('\n')]
+            print('%s ### %s'% (file_name, temp))
+            insert(temp, db)
         print('插入完毕')
     except Exception as e:
         print(e)
@@ -35,10 +32,9 @@ def read_logs(spider_name):
 if __name__ == "__main__":
     try:
         print('start')
-        _thread.start_new_thread(read_logs, ('Baiduspider',))
-        _thread.start_new_thread(read_logs, ('360Spider',))
-        _thread.start_new_thread(read_logs, ('Yisouspider',))
-        _thread.start_new_thread(read_logs, ('sogou',))
+        file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
+        for name in file_name:
+            _thread.start_new_thread(read_logs, (file_name,))
 
     except Exception as e:
         print(e)
