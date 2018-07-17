@@ -34,8 +34,16 @@ if __name__ == "__main__":
         print('start')
         file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         for name in file_name:
-            _thread.start_new_thread(read_logs, (file_name,))
-
+            _thread.start_new_thread(read_logs, (name,))
+        file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/360Spider/')
+        for name in file_name:
+            _thread.start_new_thread(read_logs, (name,))
+        file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/Yisouspider/')
+        for name in file_name:
+            _thread.start_new_thread(read_logs, (name,))
+        file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/sogou/')
+        for name in file_name:
+            _thread.start_new_thread(read_logs, (name,))
     except Exception as e:
         print(e)
         print("Error: 无法启动线程")
