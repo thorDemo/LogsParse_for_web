@@ -1,5 +1,7 @@
 # -*-coding: utf-8 -*-
 import os
+import sys
+sys.path.append('/www/wwwroot/LogsParse_for_web/')
 from LogsParse.DBtools.dbhelper import DBHelper
 import _thread
 
