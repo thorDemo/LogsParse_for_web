@@ -25,7 +25,9 @@ def read_logs(spider_name):
                 data = line.split('\t')
                 temp = [data[0].split(' ')[0], data[0].split(' ')[1], data[1], data[2], data[3].split('/', 3)[2],
                         data[4].strip('\n')]
+                print(temp)
                 insert(temp, db)
+        print('插入完毕')
     except Exception as e:
         print(e)
 
