@@ -14,17 +14,17 @@ def insert(data, db):
     db.insert(sql, param)
 
 
-def read_logs(file_name):
+def read_logs(path):
     try:
         db = DBHelper()
-        file_baidu = open('/www/wwwroot/xbw/temp/robotlog/Baiduspider/%s' % file_name, 'r+')
+        file_baidu = open(path, 'r+')
         for line in file_baidu:
             data = line.split('\t')
             temp = [data[0].split(' ')[0], data[0].split(' ')[1], data[1], data[2], data[3].split('/', 3)[2],
                     data[4].strip('\n')]
             print('%s ### %s'% (file_name, temp))
             insert(temp, db)
-        print('插入完毕')
+        print('%s 插入完毕' % path)
     except Exception as e:
         print(e)
 
@@ -34,16 +34,16 @@ if __name__ == "__main__":
         print('start')
         file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         for name in file_name:
-            _thread.start_new_thread(read_logs, (name,))
+            _thread.start_new_thread(read_logs, ('/www/wwwroot/xbw/temp/robotlog/Baiduspider/%s/' % name,))
         file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/360Spider/')
         for name in file_name:
-            _thread.start_new_thread(read_logs, (name,))
+            _thread.start_new_thread(read_logs, ('/www/wwwroot/xbw/temp/robotlog/360Spider/%s/' % name,))
         file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/Yisouspider/')
         for name in file_name:
-            _thread.start_new_thread(read_logs, (name,))
+            _thread.start_new_thread(read_logs, ('/www/wwwroot/xbw/temp/robotlog/Yisouspider/%s/' % name,))
         file_name = os.listdir('/www/wwwroot/xbw/temp/robotlog/sogou/')
         for name in file_name:
-            _thread.start_new_thread(read_logs, (name,))
+            _thread.start_new_thread(read_logs, ('/www/wwwroot/xbw/temp/robotlog/sogou/%s/' % name,))
     except Exception as e:
         print(e)
         print("Error: 无法启动线程")
