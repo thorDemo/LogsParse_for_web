@@ -17,7 +17,7 @@ def insert(data, db):
 def read_logs(spider_name):
     try:
         db = DBHelper()
-        path = '/www/wwwroot/xbw/temp/robotlogs/'
+        path = '/www/wwwroot/xbw/temp/robotlog/'
         file_name = os.listdir(path)
         for name in file_name:
             file_baidu = open('%s%s/%s' % (path, spider_name, name), 'r+')
