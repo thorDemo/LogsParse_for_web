@@ -1,17 +1,13 @@
 import pymysql
-from scrapy.utils.project import get_project_settings#引入settings配置
-
 
 class DBHelper():
 
     def __init__(self):
-        self.settings=get_project_settings()#获取settings配置数据
-
-        self.host=self.settings['MYSQL_HOST']
-        self.port=self.settings['MYSQL_PORT']
-        self.user=self.settings['MYSQL_USER']
-        self.passwd=self.settings['MYSQL_PASSWD']
-        self.db=self.settings['MYSQL_DBNAME']
+        self.host = '127.0.0.1'
+        self.port = 3306
+        self.user = 'spider'
+        self.passwd = 'password'
+        self.db = 'spider'
 
     #连接mysql
     def connectMysql(self):

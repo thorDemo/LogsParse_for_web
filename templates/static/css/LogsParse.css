@@ -1,1 +1,5 @@
 /*test page*/
+.spider_url:hover{
+    background: #c7ddef;
+    cursor: pointer;
+}
