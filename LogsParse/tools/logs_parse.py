@@ -18,10 +18,11 @@ def read_logs(url, date):
         spider = ['Baiduspider', '360Spider', 'sogou', 'Yisouspider']
         for line in spider:
             order = 'cat /www/wwwroot/xbw/temp/robotlogs/%s/%s |grep %s|wc -l' % (line, date, url)
-            pi = subprocess.Popen(order, shell=True,stdout=subprocess.Popen)
-            result = pi.stdout.read().strip('\n')
+            print(order)
+            pi = subprocess.Popen(order, shell=True, stdout=subprocess.Popen)
+            result = pi.stdout.read()
             cookie = open('%s/LogsParse/cookie/%s' % (path, url), 'a+')
-            cookie.write('%s %s %s' % (date.strip('.log'), url, result))
+            cookie.write('%s %s %s' % (date.strip('.log'), url, result.strip('\n')))
             print('%s %s %s' % (date, url, result))
     except Exception as e:
         print(e)
