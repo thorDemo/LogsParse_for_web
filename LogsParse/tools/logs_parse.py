@@ -30,11 +30,11 @@ def read_logs(url, date):
 if __name__ == "__main__":
     try:
         urls = []
-        path = os.path.abspath('.')
+        path = '/www/wwwroot/xbw/LogsParse_for_web/LogsParse/'
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
-        group = os.listdir('%s/LogsParse/domain' % path)
+        group = os.listdir('/www/wwwroot/xbw/LogsParse_for_web/LogsParse/domain')
         for file in group:
-            domain = open('%s/LogsParse/domain/%s/domain.txt' % (path, file), 'r+')
+            domain = open('%sdomain/%s/domain.txt' % (path, file), 'r+')
             for line in domain:
                 urls.append(line.strip('\n'))
         for url in urls:
