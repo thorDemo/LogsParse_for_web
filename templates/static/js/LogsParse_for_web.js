@@ -221,9 +221,21 @@ $(document).on('click', '.dropdown-menu > li > a', function () {
     let elem = $('#spider_group_url').empty();
     for(let x = 0; x < arry.length; x++){
         let url = '<div class="ace_scrollbar-inner spider_url" style="height: 22px; width: 546px;">' +
-                        '<span>' + x + '</span>'
+                        '<span>' + format(x) + '</span>'
                       + '<span>  http://' + arry[x] + '</span>' +
                   '</div>';
         elem.append(url)
     }
 });
+
+function format(x) {
+    if(x < 10){
+        return '00' + x
+    }
+    if(x < 100){
+        return '0' + x
+    }
+    else {
+        return x
+    }
+}

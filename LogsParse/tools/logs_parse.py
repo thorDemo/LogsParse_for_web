@@ -1,9 +1,8 @@
 # -*-coding: utf-8 -*-
 import os
 import sys
-from LogsParse.DBtools.dbhelper import DBHelper
-import subprocess
 sys.path.append('/www/wwwroot/LogsParse_for_web/')
+import subprocess
 
 
 def insert(data, db):
