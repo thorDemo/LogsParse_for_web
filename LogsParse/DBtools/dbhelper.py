@@ -3,7 +3,7 @@ import pymysql
 class DBHelper():
 
     def __init__(self):
-        self.host = '127.0.0.1'
+        self.host = '23.110.211.170'
         self.port = 3306
         self.user = 'spider'
         self.passwd = 'password'

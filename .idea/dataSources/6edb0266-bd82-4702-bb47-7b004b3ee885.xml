@@ -806,53 +806,76 @@
       <Charset>utf8mb4</Charset>
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
-    <table id="202" parent="3" name="spider_num_of_url"/>
-    <column id="203" parent="202" name="id">
+    <table id="202" parent="3" name="spider_group_url"/>
+    <table id="203" parent="3" name="spider_num_of_url"/>
+    <column id="204" parent="202" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="204" parent="202" name="spider_ip">
+    <column id="205" parent="202" name="spider_url">
+      <Position>2</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="206" parent="202" name="spider_group">
+      <Position>3</Position>
+      <DataType>varchar(50)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <key id="207" parent="202" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="208" parent="203" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="209" parent="203" name="spider_ip">
       <Position>2</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="205" parent="202" name="spider_date">
+    <column id="210" parent="203" name="spider_date">
       <Position>3</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="206" parent="202" name="spider_time">
+    <column id="211" parent="203" name="spider_time">
       <Position>4</Position>
       <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="207" parent="202" name="spider_name">
+    <column id="212" parent="203" name="spider_name">
       <Position>5</Position>
       <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="208" parent="202" name="target_url">
+    <column id="213" parent="203" name="target_url">
       <Position>6</Position>
       <DataType>varchar(100)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="209" parent="202" name="group_name">
+    <column id="214" parent="203" name="group_name">
       <Position>7</Position>
       <DataType>varchar(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="210" parent="202" name="spider_num_of_url_spider_name_index">
+    <index id="215" parent="203" name="spider_num_of_url_spider_name_index">
       <ColNames>spider_name</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="211" parent="202" name="PRIMARY">
+    <key id="216" parent="203" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

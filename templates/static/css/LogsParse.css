@@ -3,3 +3,7 @@
     background: #c7ddef;
     cursor: pointer;
 }
+
+.dropdown:hover{
+    display: block;
+}
