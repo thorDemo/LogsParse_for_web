@@ -35,7 +35,7 @@ if __name__ == "__main__":
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         group = os.listdir('/www/wwwroot/LogsParse_for_web/LogsParse/domain/')
         for file in group:
-            domain = open('%sdomain/%s/domain.txt' % (path, file), 'a+')
+            domain = open('%sdomain/%s/domain.txt' % (path, file), 'w+')
             for line in domain:
                 urls.append(line.strip('\n'))
         for url in urls:
