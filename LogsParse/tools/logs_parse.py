@@ -31,7 +31,7 @@ if __name__ == "__main__":
     try:
         urls = []
         path = os.path.abspath('.')
-        dates = os.listdir('/www/wwwroot/xbw/temp/robotlogs/Baiduspider/')
+        dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         group = os.listdir('%s/LogsParse/domain' % path)
         for file in group:
             domain = open('%s/LogsParse/domain/%s/domain.txt' % (path, file), 'r+')
