@@ -2,7 +2,7 @@
 import os
 import sys
 sys.path.append('/www/wwwroot/LogsParse_for_web/')
-import subprocess
+from subprocess import Popen, PIPE
 
 
 def insert(data, db):
@@ -19,7 +19,7 @@ def read_logs(url, date):
         for line in spider:
             order = 'cat /www/wwwroot/xbw/temp/robotlog/%s/%s |grep %s|wc -l' % (line, date, url)
             print(order)
-            pi = subprocess.Popen(order, shell=True, stdout=subprocess.Popen)
+            pi = Popen(order, shell=True, stdout=PIPE)
             result = pi.stdout.read()
             cookie = open('%s/LogsParse/cookie/%s' % (path, url), 'a+')
             cookie.write('%s %s %s' % (date.strip('.log'), url, result.strip('\n')))
