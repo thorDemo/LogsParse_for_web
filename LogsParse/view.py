@@ -62,8 +62,7 @@ def search_url(request):
     dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
     category = []
     for date in dates:
-        category.append(date.strip('.log'))
-        print(date.strip('.log'))
+        category.append(date.strip('.log').replace('2018', ''))
     category.sort()
     print(category)
     result = dict()
