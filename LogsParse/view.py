@@ -55,3 +55,22 @@ def search_dir(request):
                 urls.append(line.strip('\n'))
             data[file] = urls
     return HttpResponse(json.dumps(data))
+
+
+def search_url(request):
+    url = request.GET.get('spider_url')
+    dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
+    category = []
+    for x in (0, len(dates)):
+        category.append(dates[x].strip('.log'))
+    category.sort()
+    result = dict()
+    result['title'] = '九组蜘蛛池 域名：%s' % url
+    result['category'] = category
+    result['Baiduspider'] = ['']
+    result['Yisouspider'] = ['']
+    result['360Spider'] = ['']
+    result['sougou'] = ['']
+    return HttpResponse(json.dumps(result))
+
+

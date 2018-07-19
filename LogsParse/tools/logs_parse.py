@@ -34,11 +34,11 @@ if __name__ == "__main__":
             domain = open('%sdomain/%s/domain.txt' % (path, file), 'r')
             for line in domain:
                 urls.append(line.strip('\n'))
-        print(urls)
+        print(urls[2])
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         for x in (0, len(urls)):
             print('agent !')
-            for z in range(0, len(dates)-1):
+            for z in range(0, len(dates)):
                 print('%s %s num = %s' % (urls[x], dates[z], z))
                 read_logs(urls[x], dates[z])
 

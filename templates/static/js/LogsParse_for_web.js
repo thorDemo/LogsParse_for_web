@@ -216,8 +216,8 @@ $(document).on('click', '.dropdown-menu > li > a', function () {
     let text = $(this).text();
     $('.code-info-time').text(text);
 
+    setCharts(option_1);
     let arry = obj[text];
-    console.log(arry);
     let elem = $('#spider_group_url').empty();
     for(let x = 0; x < arry.length; x++){
         let url = '<div class="ace_scrollbar-inner spider_url" style="height: 22px; width: 546px;">' +
@@ -226,6 +226,111 @@ $(document).on('click', '.dropdown-menu > li > a', function () {
                   '</div>';
         elem.append(url)
     }
+});
+
+$(document).on('click','.spider_url', function () {
+    $.get('/spider_data/',{'spider_url':$(this).text()},function (data) {
+        obj = JSON.parse(data);
+        myChart.setOption({
+        title : {
+            text: '蜘蛛数量统计',
+            subtext: obj['title']
+        },
+        tooltip : {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['百度蜘蛛','神马蜘蛛','360蜘蛛','搜狗蜘蛛']
+        },
+        toolbox: {
+            show : true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable : true,
+        xAxis : [
+            {
+                type : 'category',
+                data : obj['category']
+            }
+        ],
+        yAxis : [
+            {
+                type : 'value'
+            }
+        ],
+        series : [
+            {
+                name:'百度蜘蛛',
+                type:'bar',
+                data: obj['Baiduspider'],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name: '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'神马蜘蛛',
+                type:'bar',
+                data: obj['Yisouspider'],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'360蜘蛛',
+                type:'bar',
+                data: obj['360Spider'],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            },
+            {
+                name:'搜狗蜘蛛',
+                type:'bar',
+                data: obj['sougou'],
+                markPoint : {
+                    data : [
+                        {type : 'max', name: '最大值'},
+                        {type : 'min', name: '最小值'}
+                    ]
+                },
+                markLine : {
+                    data : [
+                        {type : 'average', name : '平均值'}
+                    ]
+                }
+            }
+        ]
+    });
+    });
 });
 
 function format(x) {

@@ -22,5 +22,6 @@ urlpatterns = [
     url(r'index.html', view.index),
     url(r'^data/', view.data),
     url(r'^$', view.index),
-    url(r'^dirs/', view.search_dir)
+    url(r'^dirs/', view.search_dir),
+    url(r'^spider_data/', view.search_url)
 ]
