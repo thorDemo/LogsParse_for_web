@@ -36,13 +36,13 @@ if __name__ == "__main__":
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         group = os.listdir('/www/wwwroot/LogsParse_for_web/LogsParse/domain/')
         for file in group:
-            domain = open('%sdomain/%s/domain.txt' % (path, file), 'r+')
+            domain = open('%sdomain/%s/domain.txt' % (path, file), 'r')
             for line in domain:
-                print(line)
                 urls.append(line.strip('\n'))
-        for url in (0, len(urls)):
+        print(urls)
+        for x in (0, len(urls)):
             for date in dates:
-                print('%s %s' % (url, date))
-                read_logs(url, date)
+                print('%s %s' % (urls[x], date))
+                read_logs(urls[x], date)
     except Exception as e:
         print(e)
