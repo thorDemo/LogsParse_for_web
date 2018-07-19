@@ -80,7 +80,7 @@ def search_url(request):
 def spider_num(spider_name, category, url):
     number = []
     for date in category:
-        order = 'cat /www/wwwroot/xbw/temp/robotlog/%s/2018%s.log |grep %s|wc -l' % (spider_name, date, url.replace('http://'))
+        order = 'cat /www/wwwroot/xbw/temp/robotlog/%s/2018%s.log |grep %s|wc -l' % (spider_name, date, url.replace('http://', ''))
         print(order)
         pi = Popen(order, shell=True, stdout=PIPE)
         result = int(pi.stdout.read())
