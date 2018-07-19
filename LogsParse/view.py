@@ -60,11 +60,12 @@ def search_dir(request):
 def search_url(request):
     url = request.GET.get('spider_url')
     dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
-    print(dates)
     category = []
-    for x in (0, len(dates)):
-        category.append(dates[x].strip('.log'))
+    for date in dates:
+        category.append(date.strip('.log'))
+        print(date.strip('.log'))
     category.sort()
+    print(category)
     result = dict()
     result['title'] = '九组蜘蛛池 域名：%s' % url
     result['category'] = category
