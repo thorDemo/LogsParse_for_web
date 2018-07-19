@@ -19,10 +19,9 @@ def read_logs(_url, _date):
         print(order)
         pi = Popen(order, shell=True, stdout=PIPE)
         result = str(pi.stdout.read())
-        print(result)
         cookie = open('/www/wwwroot/LogsParse_for_web/LogsParse/cookie/%s' % _url, 'a+')
-        cookie.write('%s %s %s' % (date.strip('.log'), _url, result.strip('\n')))
-        print('%s %s %s' % (_date, _url, result))
+        cookie.write('%s %s %s' % (_date.strip('.log'), _url, result.strip('\n')))
+        print('%s %s %s' % (_date, _url, result.strip('\n')))
 
 
 if __name__ == "__main__":
@@ -36,11 +35,12 @@ if __name__ == "__main__":
             for line in domain:
                 urls.append(line.strip('\n'))
         print(urls)
+        dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         for x in (0, len(urls)):
             print('agent !')
-            dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
-            for date in dates:
-                print('%s %s' % (urls[x], date))
-                read_logs(urls[x], date)
+            for z in range(0, len(dates)):
+                print('%s %s' % (urls[x], dates[z]))
+                read_logs(urls[x], dates[z])
+
     except Exception as e:
         print(e)
