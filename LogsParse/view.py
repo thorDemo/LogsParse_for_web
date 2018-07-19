@@ -3,6 +3,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 import json
 from LogsParse.libs.data import SSHClient
+from subprocess import PIPE, Popen
 import datetime
 import os
 
@@ -65,13 +66,23 @@ def search_url(request):
         category.append(date.strip('.log').replace('2018', ''))
     category.sort()
     print(category)
+    Baidu = spider_num('Baiduspider',category, str(url).split(' ')[2])
     result = dict()
     result['title'] = '九组蜘蛛池 域名：%s' % url
     result['category'] = category
-    result['Baiduspider'] = ['']
+    result['Baiduspider'] = Baidu
     result['Yisouspider'] = ['']
     result['360Spider'] = ['']
     result['sougou'] = ['']
     return HttpResponse(json.dumps(result))
 
 
+def spider_num(spider_name, category, url):
+    number = []
+    for date in category:
+        order = 'cat /www/wwwroot/xbw/temp/robotlog/%s/2018%s.log |grep %s|wc -l' % (spider_name, date, url)
+        print(order)
+        pi = Popen(order, shell=True, stdout=PIPE)
+        result = int(pi.stdout.read())
+        number.append(result)
+    return number
