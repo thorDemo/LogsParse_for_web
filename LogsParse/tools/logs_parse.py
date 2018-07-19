@@ -38,8 +38,9 @@ if __name__ == "__main__":
         for file in group:
             domain = open('%sdomain/%s/domain.txt' % (path, file), 'a+')
             for line in domain:
+                print(line)
                 urls.append(line.strip('\n'))
-        for url in urls:
+        for url in (0, len(urls)):
             for date in dates:
                 print('%s %s' % (url, date))
                 read_logs(url, date)
