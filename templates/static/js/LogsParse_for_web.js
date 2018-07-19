@@ -230,11 +230,11 @@ $(document).on('click', '.dropdown-menu > li > a', function () {
 
 $(document).on('click','.spider_url', function () {
     $.get('/spider_data/',{'spider_url':$(this).text()},function (data) {
-        obj = JSON.parse(data);
+        spider_data = JSON.parse(data);
         myChart.setOption({
         title : {
             text: '蜘蛛数量统计',
-            subtext: obj['title']
+            subtext: spider_data['title']
         },
         tooltip : {
             trigger: 'axis'
@@ -255,7 +255,7 @@ $(document).on('click','.spider_url', function () {
         xAxis : [
             {
                 type : 'category',
-                data : obj['category']
+                data : spider_data['category']
             }
         ],
         yAxis : [
@@ -267,7 +267,7 @@ $(document).on('click','.spider_url', function () {
             {
                 name:'百度蜘蛛',
                 type:'bar',
-                data: obj['Baiduspider'],
+                data: spider_data['Baiduspider'],
                 markPoint : {
                     data : [
                         {type : 'max', name: '最大值'},
@@ -283,7 +283,7 @@ $(document).on('click','.spider_url', function () {
             {
                 name:'神马蜘蛛',
                 type:'bar',
-                data: obj['Yisouspider'],
+                data: spider_data['Yisouspider'],
                 markPoint : {
                     data : [
                         {type : 'max', name: '最大值'},
@@ -299,7 +299,7 @@ $(document).on('click','.spider_url', function () {
             {
                 name:'360蜘蛛',
                 type:'bar',
-                data: obj['360Spider'],
+                data: spider_data['360Spider'],
                 markPoint : {
                     data : [
                         {type : 'max', name: '最大值'},
@@ -315,7 +315,7 @@ $(document).on('click','.spider_url', function () {
             {
                 name:'搜狗蜘蛛',
                 type:'bar',
-                data: obj['sougou '],
+                data: spider_data['sogou '],
                 markPoint : {
                     data : [
                         {type : 'max', name: '最大值'},

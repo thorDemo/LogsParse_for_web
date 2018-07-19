@@ -59,21 +59,24 @@ def search_dir(request):
 
 
 def search_url(request):
-    url = request.GET.get('spider_url')
+    url = str(request.GET.get('spider_url')).split(' ')[2]
     dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
     category = []
     for date in dates:
         category.append(date.strip('.log').replace('2018', ''))
     category.sort()
     print(category)
-    Baidu = spider_num('Baiduspider',category, str(url).split(' ')[2])
+    Baidu = spider_num('Baiduspider',category, url)
+    Yisouspider = spider_num('Yisouspider', category, url)
+    Spider360 = spider_num('360Spider', category, url)
+    sogou = spider_num('sougou', category, url)
     result = dict()
     result['title'] = '九组蜘蛛池 域名：%s' % url
     result['category'] = category
     result['Baiduspider'] = Baidu
-    result['Yisouspider'] = ['']
-    result['360Spider'] = ['']
-    result['sougou'] = ['']
+    result['Yisouspider'] = Yisouspider
+    result['Spider360'] = Spider360
+    result['sogou'] = sogou
     return HttpResponse(json.dumps(result))
 
 
