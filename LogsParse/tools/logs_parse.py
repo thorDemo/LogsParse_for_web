@@ -21,7 +21,7 @@ def read_logs(_url, _date):
             print(order)
             pi = Popen(order, shell=True, stdout=PIPE)
             result = pi.stdout.read()
-            cookie = open('%s/LogsParse/cookie/%s' % (_path, _url), 'a+')
+            cookie = open('/www/wwwroot/LogsParse_for_web/LogsParse/cookie/%s' % _url, 'a+')
             cookie.write('%s %s %s' % (date.strip('.log'), _url, result.strip('\n')))
             print('%s %s %s' % (_date, _url, result))
     except Exception as e:
@@ -40,6 +40,7 @@ if __name__ == "__main__":
                 urls.append(line.strip('\n'))
         print(urls)
         for x in (0, len(urls)):
+            print('agent !')
             dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
             for date in dates:
                 print('%s %s' % (urls[x], date))
