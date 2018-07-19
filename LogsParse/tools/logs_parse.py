@@ -14,14 +14,14 @@ def insert(data, db):
 
 def read_logs(_url, _date):
     spider = ['Baiduspider', '360Spider', 'sogou', 'Yisouspider']
-    for y in range(0, 3):
+    for y in range(0, 4):
         order = 'cat /www/wwwroot/xbw/temp/robotlog/%s/%s |grep %s|wc -l' % (spider[y], _date, _url)
         print(order)
         pi = Popen(order, shell=True, stdout=PIPE)
-        result = str(pi.stdout.read())
+        result = int(pi.stdout.read())
         cookie = open('/www/wwwroot/LogsParse_for_web/LogsParse/cookie/%s' % _url, 'a+')
-        cookie.write('%s %s %s' % (_date.strip('.log'), _url, result.strip('\n')))
-        print('%s %s %s' % (_date, _url, result.strip('\n')))
+        cookie.write('%s %s %s' % (_date.strip('.log'), _url, result))
+        print('%s %s %s' % (_date, _url, result))
 
 
 if __name__ == "__main__":
@@ -38,8 +38,8 @@ if __name__ == "__main__":
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         for x in (0, len(urls)):
             print('agent !')
-            for z in range(0, len(dates)):
-                print('%s %s' % (urls[x], dates[z]))
+            for z in range(0, len(dates)-1):
+                print('%s %s num = %s' % (urls[x], dates[z], z))
                 read_logs(urls[x], dates[z])
 
     except Exception as e:
