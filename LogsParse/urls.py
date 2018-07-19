@@ -19,9 +19,8 @@ from django.conf import settings
 from django.views.static import serve
 
 urlpatterns = [
-    url(r'index.html', view.index),
-    url(r'^data/', view.data),
     url(r'^$', view.index),
     url(r'^dirs/', view.search_dir),
-    url(r'^spider_data/', view.search_url)
+    url(r'^spider_data/', view.search_url),
+    url(r'^refresh_data/', view.refresh_data)
 ]

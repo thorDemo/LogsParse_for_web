@@ -854,10 +854,16 @@
     </column>
     <column id="212" parent="203" name="spider_num">
       <Position>4</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>text|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="213" parent="203" name="spider_num_of_url_spider_name_index">
+    <column id="213" parent="203" name="spider_group">
+      <Position>5</Position>
+      <DataType>int(11)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="214" parent="203" name="spider_num_of_url_spider_name_index">
       <ColNames>spider_name</ColNames>
       <Type>btree</Type>
     </index>

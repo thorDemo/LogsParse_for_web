@@ -1,9 +1,9 @@
 import pymysql
 
-class DBHelper():
 
+class DBHelper:
     def __init__(self):
-        self.host = '23.110.211.170'
+        self.host = '127.0.0.1'
         self.port = 3306
         self.user = 'spider'
         self.passwd = 'password'

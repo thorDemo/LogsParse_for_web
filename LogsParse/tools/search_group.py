@@ -19,3 +19,19 @@ ssh_data = {
     '9': {'host': '23.110.211.170', 'port': 22, 'pwd': 'Ptyw1q2w3e$R'},
     '10': {'host': '23.80.91.154', 'port': 22, 'pwd': 'free0514'},
 }
+
+
+def insert_spider_group_url(group_id):
+    data_base = DBHelper()
+    if group_id == 9:
+        path = '/www/wwwroot/LogsParse_for_web'
+        dirs = os.listdir('%s/LogsParse/domain' % path)
+        for file in dirs:
+            domain = open('%s/LogsParse/domain/%s/domain.txt' % (path, file), 'r+')
+            for line in domain:
+                sql = 'INSERT spider_group_url (spider_url, spider_group, spider_tips)' \
+                      'VALUES (%s,%s,%s)' % (line, group_id, file)
+                print(sql)
+                data_base.insert(sql=sql)
+    else:
+        print('this is group %s' % group_id)
