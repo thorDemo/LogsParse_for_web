@@ -30,10 +30,13 @@ def read_logs(url, date):
 
 if __name__ == "__main__":
     try:
+        print('take in process!')
         urls = []
         path = '/www/wwwroot/LogsParse_for_web/LogsParse/'
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
+        print(dates)
         group = os.listdir('/www/wwwroot/LogsParse_for_web/LogsParse/domain/')
+        print(group)
         for file in group:
             domain = open('%sdomain/%s/domain.txt' % (path, file), 'a+')
             for line in domain:
