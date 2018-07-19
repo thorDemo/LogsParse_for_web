@@ -21,6 +21,7 @@ def read_logs(_url, _date):
             print(order)
             pi = Popen(order, shell=True, stdout=PIPE)
             result = pi.stdout.read()
+            print(result)
             cookie = open('/www/wwwroot/LogsParse_for_web/LogsParse/cookie/%s' % _url, 'a+')
             cookie.write('%s %s %s' % (date.strip('.log'), _url, result.strip('\n')))
             print('%s %s %s' % (_date, _url, result))
