@@ -87,5 +87,6 @@ def spider_num(spider_name, category, url):
         print(order)
         pi = Popen(order, shell=True, stdout=PIPE)
         result = int(pi.stdout.read())
+        print(result)
         number.append(result)
     return number
