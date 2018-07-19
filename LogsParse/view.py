@@ -69,7 +69,7 @@ def search_url(request):
     Baidu = spider_num('Baiduspider',category, url)
     Yisouspider = spider_num('Yisouspider', category, url)
     Spider360 = spider_num('360Spider', category, url)
-    sogou = spider_num('sougou', category, url)
+    sogou = spider_num('sogou', category, url)
     result = dict()
     result['title'] = '九组蜘蛛池 域名：%s' % url
     result['category'] = category
