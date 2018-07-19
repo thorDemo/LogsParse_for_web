@@ -13,20 +13,17 @@ def insert(data, db):
 
 
 def read_logs(_url, _date):
-    _path = os.path.abspath('.')
-    try:
-        spider = ['Baiduspider', '360Spider', 'sogou', 'Yisouspider']
-        for y in range(0, 3):
-            order = 'cat /www/wwwroot/xbw/temp/robotlog/%s/%s |grep %s|wc -l' % (spider[y], _date, _url)
-            print(order)
-            pi = Popen(order, shell=True, stdout=PIPE)
-            result = pi.stdout.read()
-            print(result)
-            cookie = open('/www/wwwroot/LogsParse_for_web/LogsParse/cookie/%s' % _url, 'a+')
-            cookie.write('%s %s %s' % (date.strip('.log'), _url, result.strip('\n')))
-            print('%s %s %s' % (_date, _url, result))
-    except Exception as e:
-        print(e)
+    spider = ['Baiduspider', '360Spider', 'sogou', 'Yisouspider']
+    for y in range(0, 3):
+        order = 'cat /www/wwwroot/xbw/temp/robotlog/%s/%s |grep %s|wc -l' % (spider[y], _date, _url)
+        print(order)
+        pi = Popen(order, shell=True, stdout=PIPE)
+        result = pi.stdout.read()
+        print(result)
+        cookie = open('/www/wwwroot/LogsParse_for_web/LogsParse/cookie/%s' % _url, 'a+')
+        cookie.write('%s %s %s' % (date.strip('.log'), _url, result.strip('\n')))
+        print('%s %s %s' % (_date, _url, result))
+
 
 
 if __name__ == "__main__":
