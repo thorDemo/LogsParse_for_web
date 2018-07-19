@@ -208,6 +208,8 @@ $(document).ready(function () {
                 let elem = '<li><a href="#">' + p + '</a></li>';
                 $('#spider_group').append(elem);
             }
+            $('.dropdown-menu > li > a:last').trigger('click');
+            $('.spider_url:first').trigger('click');
     });
 
 });
