@@ -16,7 +16,7 @@ def read_logs(url, date):
     path = os.path.abspath('.')
     try:
         spider = ['Baiduspider', '360Spider', 'sogou', 'Yisouspider']
-        for x in range(0,len(spider)):
+        for x in range(0, 3):
             order = 'cat /www/wwwroot/xbw/temp/robotlog/%s/%s |grep %s|wc -l' % (spider[x], date, url)
             print(order)
             pi = Popen(order, shell=True, stdout=PIPE)
