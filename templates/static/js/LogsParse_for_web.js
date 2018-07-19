@@ -315,7 +315,7 @@ $(document).on('click','.spider_url', function () {
             {
                 name:'搜狗蜘蛛',
                 type:'bar',
-                data: spider_data['sogou '],
+                data: spider_data['sogou'],
                 markPoint : {
                     data : [
                         {type : 'max', name: '最大值'},

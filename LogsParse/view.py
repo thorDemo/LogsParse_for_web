@@ -75,7 +75,7 @@ def search_url(request):
     result['category'] = category
     result['Baiduspider'] = Baidu
     result['Yisouspider'] = Yisouspider
-    result['Spider360'] = Spider360
+    result['360Spider'] = Spider360
     result['sogou'] = sogou
     return HttpResponse(json.dumps(result))
 
