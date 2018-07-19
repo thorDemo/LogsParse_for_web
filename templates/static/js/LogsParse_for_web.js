@@ -11,7 +11,7 @@ let data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8
 option_1 = {
     title : {
         text: '蜘蛛数量统计',
-        subtext: '一组蜘蛛池 域名：www.aibding.com'
+        subtext: '蜘蛛池 域名：'
     },
     tooltip : {
         trigger: 'axis'
@@ -32,7 +32,7 @@ option_1 = {
     xAxis : [
         {
             type : 'category',
-            data : ['0606', '0607', '0608', '0609', '0610', '0611', '0612', '0613', '0614', '0615', '0616', '0617', '0618', '0619', '0620', '0621', '0622', '0623', '0624', '0625', '0626', '0627', '0628', '0629', '0630', '0701', '0702', '0703', '0704', '0705', '0706', '0707', '0708', '0709', '0710', '0711', '0712']
+            data : []
         }
     ],
     yAxis : [
@@ -44,7 +44,7 @@ option_1 = {
         {
             name:'百度蜘蛛',
             type:'bar',
-            data:[682, 3948, 4057, 1310, 14, 72, 2, 4, 1, 2, 7, 4, 8, 6, 5, 6, 5, 10, 5, 5, 6, 6, 8, 2, 6, 8, 5, 4, 6, 4, 6, 7, 7, 4, 6, 5, 3],
+            data:[],
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -60,7 +60,7 @@ option_1 = {
         {
             name:'神马蜘蛛',
             type:'bar',
-            data:[370, 784, 974, 798, 7, 5, 125, 2146, 113, 56, 64, 120, 129, 131, 134, 125, 159, 122, 97, 54, 96, 74, 69, 38, 115, 74, 50, 42, 78, 100, 91, 48, 52, 78, 66, 35, 33],
+            data:[],
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -76,7 +76,7 @@ option_1 = {
         {
             name:'360蜘蛛',
             type:'bar',
-            data:[7, 8, 659, 1555, 0, 6, 45, 31, 74, 5, 4, 0, 2, 4, 6, 37, 79, 8, 1, 7, 7, 0, 1, 28, 7, 0, 20, 50, 44, 5, 41, 6, 1, 112, 135, 43, 85],
+            data:[],
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -92,7 +92,7 @@ option_1 = {
         {
             name:'搜狗蜘蛛',
             type:'bar',
-            data:[156, 688, 965, 1162, 546, 716, 742, 794, 496, 32, 37, 38, 37, 35, 2, 72, 39, 38, 38, 82, 63, 77, 53, 79, 76, 88, 37, 80, 81, 78, 76, 79, 78, 78, 70, 69, 69],
+            data:[],
             markPoint : {
                 data : [
                     {type : 'max', name: '最大值'},
@@ -177,7 +177,7 @@ option_2 = {
     }]
 };
 let myChart = echarts.init(document.getElementById('chart-panel'));
-myChart.setOption(option_2);
+myChart.setOption(option_1);
 function setCharts(option){
     let myChart_old = echarts.init(document.getElementById('chart-panel'));
     myChart_old.clear();
