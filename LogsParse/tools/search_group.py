@@ -21,9 +21,9 @@ ssh_data = {
 }
 
 
-def insert_spider_group_url(group_id):
+def insert_spider_group_url(group_id, url):
     data_base = DBHelper()
-    if group_id == 9:
+    if group_id == '9':
         path = '/www/wwwroot/LogsParse_for_web'
         dirs = os.listdir('%s/LogsParse/domain' % path)
         for file in dirs:
