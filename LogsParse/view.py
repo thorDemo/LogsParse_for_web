@@ -30,7 +30,7 @@ def index(request):
 def refresh_data(request):
     group_id = request.GET.get('group_id')
     subtext = request.GET.get('subtext')
-    url = str(subtext).split('. ')[1]
+    url = str(subtext).split('//', 2)[1]
     try:
         insert_spider_group_url(group_id, url)
     except Exception as e:

@@ -27,7 +27,7 @@ let data = [[0,0,5],[0,1,1],[0,2,0],[0,3,0],[0,4,0],[0,5,0],[0,6,0],[0,7,0],[0,8
 option_1 = {
     title : {
         text: '蜘蛛数量统计',
-        subtext: '蜘蛛池 域名：'
+        subtext: '蜘蛛池 域名：http://aidshe.com'
     },
     tooltip : {
         trigger: 'axis'
@@ -373,6 +373,6 @@ $('#refresh_url').click(function () {
     let option = myChart.getOption();
     $.get('/refresh_data/',{'group_id': '9','subtext':option['title'][0]['subtext']},function (data) {
         let refresh_data = JSON.parse(data);
-        alert(refresh_data['message'] + option['title'][0]['subtext'])
+        alert(refresh_data['message'])
     });
 });
