@@ -34,6 +34,7 @@ def refresh_data(request):
     try:
         insert_spider_group_url(group_id, url)
     except Exception as e:
+        print(e)
         return HttpResponse(json.dumps({'message': 'exception %s' % url}))
     return HttpResponse(json.dumps({'message': 'this is group %s' % group_id}))
 
