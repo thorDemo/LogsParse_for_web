@@ -370,9 +370,9 @@ function format(x) {
 }
 /* 刷新数据 */
 $('#refresh_url').click(function () {
+    let option = myChart.getOption();
     $.get('/refresh_data/',{'group_id': '9','subtext':option['title'][0]['subtext']},function (data) {
         let refresh_data = JSON.parse(data);
-        let option = myChart.getOption();
         alert(refresh_data['message'] + option['title'][0]['subtext'])
     });
 });
