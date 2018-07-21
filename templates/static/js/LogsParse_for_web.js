@@ -196,9 +196,11 @@ option_2 = {
 let myChart = echarts.init(document.getElementById('chart-panel'));
 myChart.setOption(option_1);
 function setCharts(option){
+    myChart.showLoading();
     let myChart_old = echarts.init(document.getElementById('chart-panel'));
     myChart_old.clear();
     let myChart_new = echarts.init(document.getElementById('chart-panel'));
+    myChart.hideLoading();
     myChart_new.setOption(option);
 }
 
@@ -249,8 +251,10 @@ $(document).on('click', '.dropdown-menu > li > a', function () {
 });
 /* 域名点击事件 */
 $(document).on('click','.spider_url', function () {
+    myChart.showLoading();
     $.get('/spider_data/',{'spider_url':$(this).text()},function (data) {
-        spider_data = JSON.parse(data);
+        let spider_data = JSON.parse(data);
+        myChart.hideLoading();
         myChart.setOption({
         title : {
             text: '蜘蛛数量统计',
@@ -366,7 +370,9 @@ function format(x) {
 }
 /* 刷新数据 */
 $('#refresh_url').click(function () {
-    $.get('/refresh_data/',function (data) {
-        alert(data['message'])
+    $.get('/refresh_data/',{'group_id': '9','subtext':option['title'][0]['subtext']},function (data) {
+        let refresh_data = JSON.parse(data);
+        let option = myChart.getOption();
+        alert(refresh_data['message'] + option['title'][0]['subtext'])
     });
 });

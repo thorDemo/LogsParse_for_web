@@ -29,8 +29,13 @@ def index(request):
 # 刷新数据库
 def refresh_data(request):
     group_id = request.GET.get('group_id')
-    insert_spider_group_url(group_id)
-    return HttpResponse(json.dumps({'message': 'success'}))
+    subtext = request.GET.get('subtext')
+    url = str(subtext).split('. ')[1]
+    try:
+        insert_spider_group_url(group_id, url)
+    except Exception as e:
+        return HttpResponse(json.dumps({'message': 'exception %s' % url}))
+    return HttpResponse(json.dumps({'message': 'this is group %s' % group_id}))
 
 
 def search_dir(request):
@@ -45,6 +50,8 @@ def search_dir(request):
             for line in domain:
                 urls.append(line.strip('\n'))
             data[file] = urls
+    else:
+        data['message'] = 'this is group %s' % group
     return HttpResponse(json.dumps(data))
 
 

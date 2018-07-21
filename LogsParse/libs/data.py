@@ -80,5 +80,4 @@ def main():
     print(spider_num)
 
 
-if __name__ == "__main__":
-    main()
+
