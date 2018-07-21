@@ -63,7 +63,8 @@ def search_dir(request):
 def search_url(request):
     url = str(request.GET.get('spider_url')).split(' ')[2]
     group_id = request.GET.get('group_ip')
-    if group_id == '9':
+    print(group_id)
+    if group_id == '9' or group_id is None:
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         category = []
         for date in dates:
@@ -83,7 +84,7 @@ def search_url(request):
         result['sogou'] = sogou
         return HttpResponse(json.dumps(result))
     else:
-        client = SSHClient(host=ssh_data[group_id]['host'], pwd=ssh_data[group_id]['pwd'])
+        client = SSHClient(host=ssh_data[str(group_id)]['host'], pwd=ssh_data[str(group_id)]['pwd'])
         ssh = client.ssh_connect()
         result = client.spider_number(ssh, url=url)
         result['title'] = '%s组蜘蛛池 域名：%s' % (group_id, url)
