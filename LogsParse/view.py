@@ -2,7 +2,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 import json
-from LogsParse.libs.data import SSHClient
+from LogsParse.libs.ssh_data import SSHClient
 from subprocess import PIPE, Popen
 import datetime
 import os
@@ -39,11 +39,12 @@ def refresh_data(request):
     return HttpResponse(json.dumps({'message': 'this is group %s' % group_id}))
 
 
+# 获取域名分组信息
 def search_dir(request):
-    group = request.GET.get('group')
+    group_id = request.GET.get('group_id')
     path = os.path.abspath('.')
     data = dict()
-    if group == '9':
+    if group_id == '9':
         dir = os.listdir('%s/LogsParse/domain' % path)
         for file in dir:
             urls = []
@@ -52,30 +53,42 @@ def search_dir(request):
                 urls.append(line.strip('\n'))
             data[file] = urls
     else:
-        data['message'] = 'this is group %s' % group
+        client = SSHClient(host=ssh_data[group_id]['host'], pwd=ssh_data[group_id]['pwd'])
+        ssh = client.ssh_connect()
+        data = client.search_dir(ssh)
     return HttpResponse(json.dumps(data))
 
 
+# 查询url的蜘蛛数量
 def search_url(request):
     url = str(request.GET.get('spider_url')).split(' ')[2]
-    dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
-    category = []
-    for date in dates:
-        category.append(date.strip('.log').replace('2018', ''))
-    category.sort()
-    print(category)
-    Baidu = spider_num('Baiduspider',category, url)
-    Yisouspider = spider_num('Yisouspider', category, url)
-    Spider360 = spider_num('360Spider', category, url)
-    sogou = spider_num('sogou', category, url)
-    result = dict()
-    result['title'] = '九组蜘蛛池 域名：%s' % url
-    result['category'] = category
-    result['Baiduspider'] = Baidu
-    result['Yisouspider'] = Yisouspider
-    result['360Spider'] = Spider360
-    result['sogou'] = sogou
-    return HttpResponse(json.dumps(result))
+    group_id = request.GET.get('group_ip')
+    if group_id == '9':
+        dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
+        category = []
+        for date in dates:
+            category.append(date.strip('.log').replace('2018', ''))
+        category.sort()
+        print(category)
+        Baidu = spider_num('Baiduspider',category, url)
+        Yisouspider = spider_num('Yisouspider', category, url)
+        Spider360 = spider_num('360Spider', category, url)
+        sogou = spider_num('sogou', category, url)
+        result = dict()
+        result['title'] = '9组蜘蛛池 域名：%s' % url
+        result['category'] = category
+        result['Baiduspider'] = Baidu
+        result['Yisouspider'] = Yisouspider
+        result['360Spider'] = Spider360
+        result['sogou'] = sogou
+        return HttpResponse(json.dumps(result))
+    else:
+        client = SSHClient(host=ssh_data[group_id]['host'], pwd=ssh_data[group_id]['pwd'])
+        ssh = client.ssh_connect()
+        result = client.spider_number(ssh, url=url)
+        result['title'] = '%s组蜘蛛池 域名：%s' % (group_id, url)
+        ssh.close()
+        return HttpResponse(json.dumps(result))
 
 
 def spider_num(spider_name, category, url):

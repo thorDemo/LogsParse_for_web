@@ -208,20 +208,28 @@ function setCharts(option){
 $('.dropdown > a').click(function () {
     $(this).siblings('ul').toggle("slow");
 });
+/* 异步请求 */
+let obj = {};
 $('.dropdown-menu > li > a').click(function (e) {
     e.stopPropagation();
     $('.dropdown-menu').hide("slow");
     let id = $(this).attr('id');
     let text = $(this).text();
     $('.code-info-type-info').text(text);
+    $.get('/dirs/',{'group_id': id}, function () {
+        obj = JSON.parse(data);
+            for(let p in obj){
+                let elem = '<li><a href="#">' + p + '</a></li>';
+                $('#spider_group').append(elem);
+            }
+            $('.dropdown-menu > li > a:last').trigger('click');
+            $('.spider_url:first').trigger('click');
+    });
 });
 
-/* 异步请求 */
-let obj = {};
 /* 页面加载完毕后执行 读取域名和分组*/
 $(document).ready(function () {
-    $.get("/dirs/", { 'group': "9" },
-        function(data){
+    $.get("/dirs/", { 'group_id': "9" }, function(data){
             obj = JSON.parse(data);
             for(let p in obj){
                 let elem = '<li><a href="#">' + p + '</a></li>';
@@ -252,7 +260,8 @@ $(document).on('click', '.dropdown-menu > li > a', function () {
 /* 域名点击事件 */
 $(document).on('click','.spider_url', function () {
     myChart.showLoading();
-    $.get('/spider_data/',{'spider_url':$(this).text()},function (data) {
+    let group_id = $('.code-info-type-info').text()[0];
+    $.get('/spider_data/',{'spider_url':$(this).text(),'group_id': group_id},function (data) {
         let spider_data = JSON.parse(data);
         myChart.hideLoading();
         myChart.setOption({
