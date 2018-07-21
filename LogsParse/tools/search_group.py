@@ -31,7 +31,7 @@ def insert_spider_group_url(group_id, url):
             domain = open('%s/LogsParse/domain/%s/domain.txt' % (path, file), 'r+')
             for line in domain:
                 sql = 'INSERT spider_group_url (spider_url, spider_group, spider_tips)' \
-                      'VALUES (%s,%s,%s)' % (line, group_id, file)
+                      'VALUES ("%s","%s","%s")' % (line, group_id, file)
                 print(sql)
                 data_base.insert(sql=sql)
     else:
