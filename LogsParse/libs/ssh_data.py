@@ -14,39 +14,42 @@ ssh_data = {
     '6': {'host': '45.34.107.130', 'port': 22, 'pwd': 'free0714'},
     '7': {'host': '45.42.95.170', 'port': 22, 'pwd': 'Ptyw1q2w3e$R'},
     '8': {'host': '142.234.162.79', 'port': 22, 'pwd': 'Vfc4RV1C01oy'},
-    '9': {'host': '23.110.211.170', 'port': 223, 'pwd': 'Ptyw1q2w3e$R'},
+    '9': {'host': '23.110.211.170', 'port': 223, 'pwd': 'Hxt414722027'},
     '10': {'host': '23.80.91.154', 'port': 22, 'pwd': 'free0514'},
 }
 
 
 class SSHClient:
     # 配置链接
-    def __init__(self, host='23.110.211.170', port=223, user='root', pwd='Hxt414722027'):
-        self.SPIDER_HOST = host
-        self.SPIDER_PORT = port
-        self.SPIDER_USER = user
-        self.SPIDER_PWD = pwd
+    def __init__(self, group_id):
+        self.SPIDER_HOST = ssh_data[group_id]['host']
+        self.SPIDER_PORT = ssh_data[group_id]['port']
+        self.SPIDER_USER = 'root'
+        self.SPIDER_PWD = ssh_data[group_id]['pwd']
         self.XBW_PATH = '/www/wwwroot/xbw/temp/robotlog/'
         self.NOW = datetime.datetime.now().strftime('%Y%m%d')
         self.num = 0
 
     # 创建链接
     def ssh_connect(self):
+        # try:
+        _ssh_fd = paramiko.SSHClient()
         try:
-            _ssh_fd = paramiko.SSHClient()
-            try:
-                _ssh_fd.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-                _ssh_fd.connect(self.SPIDER_HOST, username=self.SPIDER_USER, password=self.SPIDER_PWD, port=self.SPIDER_PORT, allow_agent=False, look_for_keys=False)
-                print('connect success!')
-                return _ssh_fd
-            except SSHException as e:
-                print('reload connect')
-                _ssh_fd.close()
-                self.ssh_connect()
-                self.num += 1
-        except:
-            print('except reload')
+            _ssh_fd.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+            _ssh_fd.connect(self.SPIDER_HOST, username=self.SPIDER_USER, password=self.SPIDER_PWD, port=self.SPIDER_PORT, allow_agent=False, look_for_keys=False)
+            print('connect success!')
+            return _ssh_fd
+        except SSHException as e:
+            print('reload connect')
+            _ssh_fd.close()
             self.ssh_connect()
+            self.num += 1
+        # except:
+        #     self.num += 1
+        #     if self.num > 4:
+        #         return None
+        #     print('except reload')
+        #     self.ssh_connect()
 
     # 执行CMD 命令
     def ssh_exec_cmd(self, _ssh_fd, cmd):
@@ -110,7 +113,7 @@ class SSHClient:
 
 
 def main():
-    client = SSHClient(host=ssh_data['2']['host'], port=ssh_data['2']['port'], pwd=ssh_data['2']['pwd'])
+    client = SSHClient('2')
     ssh = client.ssh_connect()
     # group_url = client.search_dir(ssh)
     # print(group_url)

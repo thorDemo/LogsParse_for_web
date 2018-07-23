@@ -8,19 +8,6 @@ import datetime
 import os
 from LogsParse.tools.search_group import insert_spider_group_url
 
-ssh_data = {
-    '1': {'host': '142.234.162.99', 'port': 22, 'pwd': 'free@0516'},
-    '2': {'host': '209.58.128.89', 'port': 22, 'pwd': 'E6zJ01V7Ykig'},
-    '3': {'host': '198.56.192.250', 'port': 22, 'pwd': 'snow1029'},
-    '4': {'host': '104.243.140.166', 'port': 22, 'pwd': 'Ptyw1q2w3e$R'},
-    '5': {'host': '142.234.255.29', 'port': 22, 'pwd': 'AzVWuhQa1773'},
-    '6': {'host': '45.34.107.130', 'port': 22, 'pwd': 'free0714'},
-    '7': {'host': '45.42.95.170', 'port': 22, 'pwd': 'Ptyw1q2w3e$R'},
-    '8': {'host': '142.234.162.79', 'port': 22, 'pwd': 'Vfc4RV1C01oy'},
-    '9': {'host': '23.110.211.170', 'port': 22, 'pwd': 'Ptyw1q2w3e$R'},
-    '10': {'host': '23.80.91.154', 'port': 22, 'pwd': 'free0514'},
-}
-
 
 def index(request):
     return render(request, 'index.html')
@@ -53,7 +40,8 @@ def search_dir(request):
                 urls.append(line.strip('\n'))
             data[file] = urls
     else:
-        client = SSHClient(host=ssh_data[group_id]['host'], pwd=ssh_data[group_id]['pwd'])
+        print(group_id)
+        client = SSHClient(str(group_id))
         ssh = client.ssh_connect()
         data = client.search_dir(ssh)
     return HttpResponse(json.dumps(data))
@@ -84,11 +72,12 @@ def search_url(request):
         result['sogou'] = sogou
         return HttpResponse(json.dumps(result))
     else:
-        client = SSHClient(host=ssh_data[str(group_id)]['host'], pwd=ssh_data[str(group_id)]['pwd'])
+        client = SSHClient(str(group_id))
         ssh = client.ssh_connect()
         result = client.spider_number(ssh, url=url)
         result['title'] = '%s组蜘蛛池 域名：%s' % (group_id, url)
         ssh.close()
+        print(result)
         return HttpResponse(json.dumps(result))
 
 
