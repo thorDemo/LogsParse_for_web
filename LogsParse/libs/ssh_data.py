@@ -53,7 +53,7 @@ class SSHClient:
 
     # 执行CMD 命令
     def ssh_exec_cmd(self, _ssh_fd, cmd):
-        print("exec command %s \n%s" % (self.SPIDER_HOST, cmd))
+        # print("exec command %s \n%s" % (self.SPIDER_HOST, cmd))
         return _ssh_fd.exec_command(cmd, get_pty=True)
 
     # 查询蜘蛛数量
