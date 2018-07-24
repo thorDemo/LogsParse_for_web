@@ -7,6 +7,7 @@ from subprocess import PIPE, Popen
 import datetime
 import os
 from LogsParse.tools.search_group import insert_spider_group_url
+import glob
 
 
 def index(request):
@@ -31,7 +32,7 @@ def search_dir(request):
     group_id = request.GET.get('group_id')
     path = os.path.abspath('.')
     data = dict()
-    if group_id == '5':
+    if group_id == '8':
         dir = os.listdir('%s/LogsParse/domain' % path)
         for file in dir:
             urls = []
@@ -53,7 +54,7 @@ def search_url(request):
     url = str(request.GET.get('spider_url')).split(' ')[2]
     group_id = request.GET.get('group_ip')
     print(group_id)
-    if group_id == '5' or group_id is None:
+    if group_id == '8' or group_id is None:
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         category = []
         for date in dates:
@@ -65,7 +66,7 @@ def search_url(request):
         Spider360 = spider_num('360Spider', category, url)
         sogou = spider_num('sogou', category, url)
         result = dict()
-        result['title'] = '5组蜘蛛池 域名：%s' % url
+        result['title'] = '8组蜘蛛池 域名：%s' % url
         result['category'] = category
         result['Baiduspider'] = Baidu
         result['Yisouspider'] = Yisouspider

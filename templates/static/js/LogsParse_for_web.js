@@ -123,7 +123,7 @@ $('.dropdown-menu > li > a').click(function (e) {
     let id = $(this).attr('id');
     let text = $(this).text();
     $('.code-info-type-info').text(text);
-    $.get('/dirs/',{'group_id': '5'}, function () {
+    $.get('/dirs/',{'group_id': '8'}, function () {
         $('#spider_group > li').remove();
         obj = JSON.parse(data);
             for(let p in obj){
@@ -137,7 +137,7 @@ $('.dropdown-menu > li > a').click(function (e) {
 
 /* 页面加载完毕后执行 读取域名和分组*/
 $(document).ready(function () {
-    $.get("/dirs/", { 'group_id': "5" }, function(data){
+    $.get("/dirs/", { 'group_id': "8" }, function(data){
             obj = JSON.parse(data);
             for(let p in obj){
                 let elem = '<li><a href="#">' + p + '</a></li>';
