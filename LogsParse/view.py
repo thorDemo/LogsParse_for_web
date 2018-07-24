@@ -31,7 +31,7 @@ def search_dir(request):
     group_id = request.GET.get('group_id')
     path = os.path.abspath('.')
     data = dict()
-    if group_id == '9':
+    if group_id == '4':
         dir = os.listdir('%s/LogsParse/domain' % path)
         for file in dir:
             urls = []
@@ -40,10 +40,11 @@ def search_dir(request):
                 urls.append(line.strip('\n'))
             data[file] = urls
     else:
-        print(group_id)
-        client = SSHClient(str(group_id))
-        ssh = client.ssh_connect()
-        data = client.search_dir(ssh)
+        pass
+        # print(group_id)
+        # client = SSHClient(str(group_id))
+        # ssh = client.ssh_connect()
+        # data = client.search_dir(ssh)
     return HttpResponse(json.dumps(data))
 
 
@@ -52,7 +53,7 @@ def search_url(request):
     url = str(request.GET.get('spider_url')).split(' ')[2]
     group_id = request.GET.get('group_ip')
     print(group_id)
-    if group_id == '9' or group_id is None:
+    if group_id == '4' or group_id is None:
         dates = os.listdir('/www/wwwroot/xbw/temp/robotlog/Baiduspider/')
         category = []
         for date in dates:
@@ -64,7 +65,7 @@ def search_url(request):
         Spider360 = spider_num('360Spider', category, url)
         sogou = spider_num('sogou', category, url)
         result = dict()
-        result['title'] = '9组蜘蛛池 域名：%s' % url
+        result['title'] = '4组蜘蛛池 域名：%s' % url
         result['category'] = category
         result['Baiduspider'] = Baidu
         result['Yisouspider'] = Yisouspider
