@@ -154,17 +154,19 @@ $(document).on('click', '.dropdown-menu > li > a', function () {
     let text = $(this).text();
     $('.code-info-time').text(text);
 
+
     setCharts(option_1);
     let arry = obj[text];
     let elem = $('#spider_group_url').empty();
     for(let x = 0; x < arry.length; x++){
-        let url = '<div class="ace_scrollbar-inner spider_url" style="height: 22px; width: 546px;">' +
+            let url = '<div class="ace_scrollbar-inner spider_url " style="height: 22px; width: 546px;">' +
                         '<span>' + format(x) + '</span>'
                       + '<span>  http://' + arry[x] + '</span>' +
                   '</div>';
         elem.append(url)
     }
 });
+
 /* 域名点击事件 */
 $(document).on('click','.spider_url', function () {
     myChart.showLoading();
