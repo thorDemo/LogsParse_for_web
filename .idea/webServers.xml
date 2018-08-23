@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="5243d399-db75-4d69-86f0-4d63ba3df104" name="蜘蛛池服务器9" url="http://23.110.211.170">
+        <fileTransfer host="23.110.211.170" port="223" rootFolder="/www/wwwroot" accessType="SFTP">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="223" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
