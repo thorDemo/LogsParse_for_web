@@ -173,6 +173,8 @@ $(document).on('click','.spider_url', function () {
     let group_id = $('.code-info-type-info').text()[0];
     $.get('/spider_data/',{'spider_url':$(this).text(),'group_id': group_id},function (data) {
         let spider_data = JSON.parse(data);
+        let domain = $('#domain');
+        domain.attr('href', spider_data['url']);
         myChart.hideLoading();
         myChart.setOption({
         title : {
